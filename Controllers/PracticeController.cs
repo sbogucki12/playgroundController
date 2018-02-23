@@ -26,6 +26,7 @@ namespace PlaygroundAPI.Controllers
         };
 
         [Route("api/Practice/{id}")]
+        [HttpGet]
         public HttpResponseMessage Get(int id)
         {
             IEnumerable<Animal> an = animals;
@@ -36,9 +37,22 @@ namespace PlaygroundAPI.Controllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, "No such Animal located");              
-               
+                return Request.CreateResponse(HttpStatusCode.NotFound, "No such Animal located");
+
             }
+        }
+
+        [Route("api/Practice/{id}")]
+        [HttpDelete]
+        public HttpResponseMessage Delete(int id)
+        {
+            IEnumerable<Animal> an = animals;
+            animals.Remove(an.FirstOrDefault(a => a.Id == id));
+            return Request.CreateResponse(HttpStatusCode.OK, animals);
+            
+
+            
+                
         }
 
 
