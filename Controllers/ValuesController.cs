@@ -7,40 +7,70 @@ using System.Web.Http;
 
 namespace PlaygroundAPI.Controllers
 {
+
+    public class Employee
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Job { get; set; }
+
+    }
     public class ValuesController : ApiController
     {
+
+
+        List<Employee> employees = new List<Employee>
+        {
+            new Employee() { Id = 1, Job = "Janitor", Name = "Steve"},
+        new Employee() { Id = 2, Job = "Teacher", Name = "Prydz"},
+        new Employee() { Id = 3, Job = "Student", Name = "Roux"},
+        new Employee() { Id = 4, Job = "Professor", Name = "Simmons"}
+
+    };
+
+
 
         List<int> SampleList = new List<int> { 0, 1, 2, 3 };
         List<string> StringList = new List<string>();
 
-        private int AddImplement(int a, int b)
+        public Employee Get(int id)
         {
-            return a + b; 
+            Employee emp = employees.FirstOrDefault(e => e.Id == id);
+            return emp;
         }
 
-        public int PublicAdder (int a, int b)
-        {
-            return (AddImplement(a, b));
-        }
+
+        //private int AddImplement(int a, int b)
+        //{
+        //    return a + b;
+        //}
+
+        //public int PublicAdder(int a, int b)
+        //{
+        //    return (AddImplement(a, b));
+        //}
 
         // GET api/values
         //public List<int> Get()
         //{
         //    return SampleList;
-               
+
         //}
 
-        public int Get(int id, int id2)
-        {
-            return PublicAdder(id, id2);
-        }
-        
+        //public int Get(int id, int id2)
+        //{
+        //    return PublicAdder(id, id2);
+        //}
+
+
+
+
 
         // GET api/values/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/values
         public string Post([FromBody]string a)
