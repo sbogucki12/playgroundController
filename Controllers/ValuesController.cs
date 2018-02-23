@@ -36,7 +36,14 @@ namespace PlaygroundAPI.Controllers
         public Employee Get(int id)
         {
             Employee emp = employees.FirstOrDefault(e => e.Id == id);
-            return emp;
+            if(emp != null)
+            {
+                return emp;
+            }
+            else
+            {
+                return new Employee { Id = 10, Job = "Police", Name = "Huckleberry" };
+            }
         }
 
 
