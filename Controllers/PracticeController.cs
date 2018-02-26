@@ -42,13 +42,19 @@ namespace PlaygroundAPI.Controllers
         //    }
         //}
 
-
-        [Route("api/Practice")]
+        [Route("api/secure")]
         [HttpGet]
         public IHttpActionResult Get()
         {
-            return Ok(animals);
+            return Redirect("https://localhost:44324/");
         }
+
+        //[Route("api/Practice")]
+        //[HttpGet]
+        //public IHttpActionResult Get()
+        //{
+        //    return Ok(animals);
+        //}
 
         [Route("api/Practice/{id}")]
         [HttpDelete]
@@ -57,13 +63,8 @@ namespace PlaygroundAPI.Controllers
             IEnumerable<Animal> an = animals;
             animals.Remove(an.FirstOrDefault(a => a.Id == id));
             return Request.CreateResponse(HttpStatusCode.OK, animals);
-
-
-
-
         }
-
-
+        
         [Route("api/Practice/{id}")]
         [HttpGet]
         public IHttpActionResult Get(int id)
