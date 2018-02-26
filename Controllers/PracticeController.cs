@@ -71,7 +71,8 @@ namespace PlaygroundAPI.Controllers
             Animal an = animals.FirstOrDefault(a => a.Id == id);
             if (an == null)
             {
-                return Content(HttpStatusCode.NotFound, "There is no such animal in the directory.");
+                return Redirect("http://www.yahoo.com");
+                //return Content(HttpStatusCode.NotFound, "There is no such animal in the directory.");
             }
             else
                 return Ok(an);
