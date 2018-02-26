@@ -25,21 +25,29 @@ namespace PlaygroundAPI.Controllers
             new Animal{ Id = 4, Name = "Monkey", IsMale = false }
         };
 
-        [Route("api/Practice/{id}")]
-        [HttpGet]
-        public HttpResponseMessage Get(int id)
-        {
-            IEnumerable<Animal> an = animals;
-            Animal selectedAnimal = an.FirstOrDefault(a => a.Id == id);
-            if (selectedAnimal != null)
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, selectedAnimal);
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound, "No such Animal located");
+        //[Route("api/Practice/{id}")]
+        //[HttpGet]
+        //public HttpResponseMessage Get(int id)
+        //{
+        //    IEnumerable<Animal> an = animals;
+        //    Animal selectedAnimal = an.FirstOrDefault(a => a.Id == id);
+        //    if (selectedAnimal != null)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.OK, selectedAnimal);
+        //    }
+        //    else
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.NotFound, "No such Animal located");
 
-            }
+        //    }
+        //}
+
+
+        [Route("api/Practice")]
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+            return Ok(animals);
         }
 
         [Route("api/Practice/{id}")]
@@ -49,12 +57,25 @@ namespace PlaygroundAPI.Controllers
             IEnumerable<Animal> an = animals;
             animals.Remove(an.FirstOrDefault(a => a.Id == id));
             return Request.CreateResponse(HttpStatusCode.OK, animals);
-            
 
-            
-                
+
+
+
         }
 
+
+        [Route("api/Practice/{id}")]
+        [HttpGet]
+        public IHttpActionResult Get(int id)
+        {
+            Animal an = animals.FirstOrDefault(a => a.Id == id);
+            if (an == null)
+            {
+                return Content(HttpStatusCode.NotFound, "There is no such animal in the directory.");
+            }
+            else
+                return Ok(an);
+        }
 
 
 
